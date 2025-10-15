@@ -37,8 +37,7 @@ public class CalculatorController {
 
     private List<PositiveNumber> getPositiveNumbers(String[] numbers) {
         return Arrays.stream(numbers)
-                .map(Long::parseLong)
-                .map(PositiveNumber::new)
+                .map(PositiveNumber::from)
                 .toList();
     }
 

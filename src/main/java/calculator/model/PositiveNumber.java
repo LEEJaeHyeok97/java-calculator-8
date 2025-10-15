@@ -11,6 +11,14 @@ public class PositiveNumber {
         this.number = number;
     }
 
+    public static PositiveNumber from(String positiveNumber) {
+        return new PositiveNumber(getParsedLong(positiveNumber));
+    }
+
+    private static long getParsedLong(String positiveNumber) {
+        return Long.parseLong(positiveNumber);
+    }
+
     public long getNumber() {
         return number;
     }
