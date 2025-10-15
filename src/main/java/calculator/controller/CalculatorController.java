@@ -37,6 +37,7 @@ public class CalculatorController {
 
     private List<PositiveNumber> getPositiveNumbers(String[] numbers) {
         return Arrays.stream(numbers)
+                .filter(number -> !number.isEmpty())
                 .map(PositiveNumber::from)
                 .toList();
     }

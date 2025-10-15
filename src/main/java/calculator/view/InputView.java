@@ -16,12 +16,14 @@ public class InputView {
     }
 
     private void validateWhitespace(String input) {
-        if (input.contains(WHITESPACE))
+        if (input.contains(WHITESPACE)) {
             throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+        }
     }
 
     private void validateBlank(String input) {
-        if (!input.isEmpty() && input.isBlank())
+        if (!input.isEmpty() && input.isBlank()) {
             throw new IllegalArgumentException("공백 문자만 입력할 수 없습니다.");
+        }
     }
 }
