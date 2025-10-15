@@ -20,7 +20,7 @@ public class CalculatorController {
 
     public void run() {
         Calculator calculator = createCalculator(getSeparatedNumbers());
-        getResult(calculator);
+        printResult(calculator);
     }
 
     private String[] getSeparatedNumbers() {
@@ -41,7 +41,7 @@ public class CalculatorController {
                 .toList();
     }
 
-    private void getResult(Calculator calculator) {
+    private void printResult(Calculator calculator) {
         outputView.printResult(calculator.calculate());
     }
 }
