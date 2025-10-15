@@ -6,7 +6,8 @@ import java.util.regex.Pattern;
 
 public class Separator {
 
-    public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile("^//(.*)\\n(.*)$");
+    public static final String CUSTOM_PATTERN = "^//(.*)\\\\n(.*)$";
+    public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_PATTERN);
     public static final String DEFAULT_DELIMITER = "[,:]";
     public static final int CUSTOM_DELIMITER_GROUP_INDEX = 1;
     public static final int VALUES_GROUP_INDEX = 2;
