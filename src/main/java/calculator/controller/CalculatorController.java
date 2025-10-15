@@ -19,7 +19,7 @@ public class CalculatorController {
     }
 
     public void run() {
-        Calculator calculator = getCalculator(getSeparatedNumbers());
+        Calculator calculator = createCalculator(getSeparatedNumbers());
         getResult(calculator);
     }
 
@@ -31,7 +31,7 @@ public class CalculatorController {
         return inputView.inputString();
     }
 
-    private Calculator getCalculator(String[] numbers) {
+    private Calculator createCalculator(String[] numbers) {
         return Calculator.of(getPositiveNumbers(numbers));
     }
 
