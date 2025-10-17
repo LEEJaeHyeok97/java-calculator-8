@@ -10,6 +10,10 @@ import java.util.List;
 
 public class CalculatorController {
 
+    private static final String WHITESPACE = " ";
+    public static final String WHITE_SPACE_CONTAINS_EXCEPTION_MESSAGE = "문자열에 공백문자를 입력할 수 없습니다.";
+    public static final String ONLY_WHITESPACE_EXCEPTION_MESSAGE = "공백 문자만 입력할 수 없습니다.";
+
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -28,7 +32,27 @@ public class CalculatorController {
     }
 
     private String getInputString() {
-        return inputView.inputString();
+        String inputString = inputView.inputString();
+        validateInputString(inputString);
+
+        return inputString;
+    }
+
+    private void validateInputString(String inputString) {
+        validateBlank(inputString);
+        validateWhitespace(inputString);
+    }
+
+    private void validateWhitespace(String input) {
+        if (input.contains(WHITESPACE)) {
+            throw new IllegalArgumentException(WHITE_SPACE_CONTAINS_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private void validateBlank(String input) {
+        if (!input.isEmpty() && input.isBlank()) {
+            throw new IllegalArgumentException(ONLY_WHITESPACE_EXCEPTION_MESSAGE);
+        }
     }
 
     private Calculator createCalculator(String[] numbers) {
