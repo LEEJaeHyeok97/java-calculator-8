@@ -4,7 +4,7 @@ public class PositiveNumber {
 
     public static final String NON_POSITIVE_NUMBER = "양수를 입력해야 합니다.";
     public static final long MIN_RANGE = 1L;
-    public static final String INVALID_DELIMITER_EXCEPTION_MESSAGE = "구분자가 잘못 입력 되었습니다. 커스텀 구분자, 기본 구분자를 확인하세요";
+    public static final String INVALID_VALUE_EXCEPTION_MESSAGE = "피연산자는 양수만 입력할 수 있습니다.";
     private final long number;
 
     public PositiveNumber(long number) {
@@ -32,7 +32,7 @@ public class PositiveNumber {
         try {
             return Long.parseLong(positiveNumber);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException(INVALID_DELIMITER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(INVALID_VALUE_EXCEPTION_MESSAGE);
         }
     }
 
