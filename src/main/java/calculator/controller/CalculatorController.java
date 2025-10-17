@@ -43,6 +43,6 @@ public class CalculatorController {
     }
 
     private void printResult(Calculator calculator) {
-        outputView.printResult(calculator.calculate());
+        outputView.printResult(calculator.sumCalculate());
     }
 }
