@@ -7,16 +7,21 @@ import java.util.regex.Pattern;
 public class Separator {
 
     public static final String CUSTOM_PATTERN = "^//(.*)\\\\n(.*)$";
+    public static final String CUSTOM_UNINPUTTED_PATTERN = "^//\\\\n(.*)$";
     public static final Pattern CUSTOM_DELIMITER_PATTERN = Pattern.compile(CUSTOM_PATTERN);
+    public static final Pattern CUSTOM_DELIMITER_UNINPUTTED_PATTERN = Pattern.compile(CUSTOM_UNINPUTTED_PATTERN);
     public static final String DEFAULT_DELIMITER = "[,:]";
     public static final int CUSTOM_DELIMITER_GROUP_INDEX = 1;
     public static final int VALUES_GROUP_INDEX = 2;
     public static final String REGEX_OR_OPERATION = "|";
+    public static final String MISSING_CUSTOM_DELIMITER_EXCEPTION_MESSAGE = "커스텀 구분자가 입력되지 않았습니다.";
 
     public static String[] separate(String input) {
-        Matcher matcher = getMatcher(input);
+        validateMissingCustomDelimiter(input);
 
-        if (matcher.matches()) {
+        Matcher matcher = getCustomDelimiterMatcher(input);
+
+        if (isMatches(matcher)) {
             String customDelimiter = getCustomDelimiter(matcher);
 
             return splitByCustomDelimiter(matcher, customDelimiter);
@@ -25,20 +30,35 @@ public class Separator {
         return splitByDefaultDelimiter(input);
     }
 
-    private static String[] splitByCustomDelimiter(Matcher matcher, String customDelimiter) {
-        return getValue(matcher).split(DEFAULT_DELIMITER + REGEX_OR_OPERATION + Pattern.quote(customDelimiter));
+    private static void validateMissingCustomDelimiter(String input) {
+        Matcher matcher = getUninputtedCustomDelimiterMatcher(input);
+        if (isMatches(matcher)) {
+            throw new IllegalArgumentException(MISSING_CUSTOM_DELIMITER_EXCEPTION_MESSAGE);
+        }
     }
 
-    private static String getValue(Matcher matcher) {
-        return matcher.group(VALUES_GROUP_INDEX);
+    private static boolean isMatches(Matcher matcher) {
+        return matcher.matches();
+    }
+
+    private static Matcher getUninputtedCustomDelimiterMatcher(String input) {
+        return CUSTOM_DELIMITER_UNINPUTTED_PATTERN.matcher(input);
+    }
+
+    private static Matcher getCustomDelimiterMatcher(String input) {
+        return CUSTOM_DELIMITER_PATTERN.matcher(input);
     }
 
     private static String getCustomDelimiter(Matcher matcher) {
         return matcher.group(CUSTOM_DELIMITER_GROUP_INDEX);
     }
 
-    private static Matcher getMatcher(String input) {
-        return CUSTOM_DELIMITER_PATTERN.matcher(input);
+    private static String[] splitByCustomDelimiter(Matcher matcher, String customDelimiter) {
+        return getValue(matcher).split(DEFAULT_DELIMITER + REGEX_OR_OPERATION + Pattern.quote(customDelimiter));
+    }
+
+    private static String getValue(Matcher matcher) {
+        return matcher.group(VALUES_GROUP_INDEX);
     }
 
     private static String[] splitByDefaultDelimiter(String input) {
