@@ -15,7 +15,7 @@ public class Calculator {
         return new Calculator(positiveNumbers);
     }
 
-    public long sumCalculate() {
+    public long calculateSum() {
         return positiveNumbers.stream()
                 .map(PositiveNumber::getNumber)
                 .reduce(DEFAULT_VALUE, Long::sum);
