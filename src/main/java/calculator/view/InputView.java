@@ -17,7 +17,7 @@ public class InputView {
 
     private void validateWhitespace(String input) {
         if (input.contains(WHITESPACE)) {
-            throw new IllegalArgumentException("유효하지 않은 입력입니다.");
+            throw new IllegalArgumentException("문자열에 공백문자를 입력할 수 없습니다.");
         }
     }
 
