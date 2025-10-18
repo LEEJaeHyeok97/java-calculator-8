@@ -41,9 +41,12 @@ public class PositiveNumber {
     }
 
     private static void validateOverflow(String positiveNumber) {
-        BigInteger bigInteger = new BigInteger(positiveNumber);
-        if (bigInteger.compareTo(MAX_VALUE_BIG_INTEGER) > 0) {
-            throw new IllegalArgumentException(ErrorMessage.NUMBER_OVERFLOW.getErrorMessage());
+        try {
+            if (new BigInteger(positiveNumber).compareTo(MAX_VALUE_BIG_INTEGER) > 0) {
+                throw new IllegalArgumentException(ErrorMessage.NUMBER_OVERFLOW.getErrorMessage());
+            }
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_VALUE.getErrorMessage());
         }
     }
 
