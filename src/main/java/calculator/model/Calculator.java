@@ -1,12 +1,12 @@
 package calculator.model;
 
+import calculator.exception.ErrorMessage;
 import calculator.model.vo.PositiveNumber;
 import java.math.BigInteger;
 import java.util.List;
 
 public class Calculator {
 
-    public static final String SUM_OVERFLOW_EXCEPTION_MESSAGE = "계산 결과가 최대 범위를 초과했습니다.";
     private final List<PositiveNumber> positiveNumbers;
 
     public Calculator(List<PositiveNumber> positiveNumber) {
@@ -32,7 +32,7 @@ public class Calculator {
 
     private void validateOverflow(BigInteger calculatedValue) {
         if (calculatedValue.compareTo(PositiveNumber.MAX_VALUE_BIG_INTEGER) > 0) {
-            throw new IllegalArgumentException(SUM_OVERFLOW_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ErrorMessage.SUM_OVERFLOW.getErrorMessage());
         }
     }
 

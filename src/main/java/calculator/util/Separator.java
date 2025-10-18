@@ -1,6 +1,7 @@
 package calculator.util;
 
 
+import calculator.exception.ErrorMessage;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,8 +15,6 @@ public class Separator {
     public static final int CUSTOM_DELIMITER_GROUP_INDEX = 1;
     public static final int VALUES_GROUP_INDEX = 2;
     public static final String REGEX_OR_OPERATION = "|";
-    public static final String MISSING_CUSTOM_DELIMITER_EXCEPTION_MESSAGE = "커스텀 구분자가 입력되지 않았습니다.";
-    public static final String NUMBER_DELIMITER_EXCEPTION_MESSAGE = "숫자는 구분자가 될 수 없습니다.";
     public static final String NUMBER_DELIMITER_PATTERN = "^[0-9]+$";
 
     public static String[] separate(String input) {
@@ -35,7 +34,8 @@ public class Separator {
     private static void validateMissingCustomDelimiter(String input) {
         Matcher matcher = getUninputtedCustomDelimiterMatcher(input);
         if (isMatches(matcher)) {
-            throw new IllegalArgumentException(MISSING_CUSTOM_DELIMITER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(
+                    ErrorMessage.MISSING_CUSTOM_DELIMITER.getErrorMessage());
         }
     }
 
@@ -59,7 +59,7 @@ public class Separator {
 
     private static void validateIsNumberDelimiter(Matcher matcher) {
         if (isNumberDelimiter(matcher.group(CUSTOM_DELIMITER_GROUP_INDEX))) {
-            throw new IllegalArgumentException(NUMBER_DELIMITER_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ErrorMessage.NUMBER_DELIMITER.getErrorMessage());
         }
     }
 

@@ -1,5 +1,6 @@
 package calculator.controller;
 
+import calculator.exception.ErrorMessage;
 import calculator.model.Calculator;
 import calculator.model.vo.PositiveNumber;
 import calculator.util.Separator;
@@ -11,9 +12,6 @@ import java.util.List;
 public class CalculatorController {
 
     private static final String WHITESPACE = " ";
-    public static final String WHITE_SPACE_CONTAINS_EXCEPTION_MESSAGE = "문자열에 공백문자를 입력할 수 없습니다.";
-    public static final String ONLY_WHITESPACE_EXCEPTION_MESSAGE = "공백 문자만 입력할 수 없습니다.";
-
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -45,13 +43,13 @@ public class CalculatorController {
 
     private void validateWhitespace(String input) {
         if (input.contains(WHITESPACE)) {
-            throw new IllegalArgumentException(WHITE_SPACE_CONTAINS_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ErrorMessage.WHITE_SPACE_CONTAINS.getErrorMessage());
         }
     }
 
     private void validateBlank(String input) {
         if (!input.isEmpty() && input.isBlank()) {
-            throw new IllegalArgumentException(ONLY_WHITESPACE_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ErrorMessage.ONLY_WHITESPACE.getErrorMessage());
         }
     }
 
