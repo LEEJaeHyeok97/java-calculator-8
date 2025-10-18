@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.model.Calculator;
-import calculator.model.PositiveNumber;
+import calculator.model.vo.PositiveNumber;
 import calculator.util.Separator;
 import calculator.view.InputView;
 import calculator.view.OutputView;
